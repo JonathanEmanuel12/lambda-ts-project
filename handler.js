@@ -1,10 +1,12 @@
 const express = require("express")
+const cors = require('cors')
 const serverless = require("serverless-http")
 require('dotenv').config()
 const apiKeyAuth = require('./src/middlewares/api_key_auth_middleware')
 const { indexContacts, showContact, saveContact } = require("./src/controllers/contact_controller")
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 app.get("/users", apiKeyAuth, indexContacts)
