@@ -8,7 +8,7 @@ service: lambda-ts-project
 stages:
   default:
     params:
-      tableName: "users-table-${sls:stage}"
+      tableName: "contact-table-${sls:stage}"
 
 provider:
   name: aws
@@ -28,9 +28,9 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
           Resource:
-            - Fn::GetAtt: [UsersTable, Arn]
+            - Fn::GetAtt: [ContactsTable, Arn]
   environment:
-    USERS_TABLE: ${param:tableName}
+    CONTACT_TABLE: ${param:tableName}
 
 functions:
   api:
@@ -40,14 +40,14 @@ functions:
 
 resources:
   Resources:
-    UsersTable:
+    ContactsTable:
       Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-          - AttributeName: userId
+          - AttributeName: email
             AttributeType: S
         KeySchema:
-          - AttributeName: userId
+          - AttributeName: email
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${param:tableName}

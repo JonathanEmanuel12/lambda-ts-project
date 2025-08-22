@@ -1,4 +1,4 @@
-export function getEmailTemplate(name: string, email: string, message: string): string {
+function getEmailTemplate(name, email, message) {
     return `
         <!DOCTYPE html>
         <html lang="pt-BR">
@@ -87,3 +87,5 @@ export function getEmailTemplate(name: string, email: string, message: string): 
         </html>
     `
 }
+
+module.exports = { getEmailTemplate }
